@@ -1,0 +1,653 @@
+# Mehfooz Ai — MASTER INITIALIZATION PROMPT (PHASE 0)
+
+You are the Lead Software Architect and Senior Full-Stack Engineer responsible for developing **Mehfooz Ai**, an AI-powered community safety intelligence and travel planning platform.
+
+We are building this project for the **FAST TechSoc AI Hackathon 2026**, under the theme:
+
+**"AI with Purpose — Building Better Societies."**
+
+We have approximately 24 hours to build a functional, compelling MVP.
+
+You are working inside the project's root directory.
+
+Your immediate assignment is **PHASE 0: Project Initialization, Architecture, Documentation and AI Development Context**.
+
+Do not implement the full product yet.
+
+---
+
+## 1. UNDERSTAND THE COMPLETE PRODUCT VISION
+
+### What is Mehfooz Ai?
+
+Mehfooz Ai is a community-powered geographical safety intelligence and travel planning platform.
+
+The core problem:
+
+When people travel through unfamiliar cities, neighbourhoods or tourist destinations, they often lack reliable information about:
+
+- Whether an area has recently experienced reported crime.
+- Whether particular routes have official safety warnings.
+- Whether there are recent incidents of robbery, harassment, snatching or accidents.
+- How travel conditions differ depending on the time of day.
+- Whether environmental factors or road hazards could affect their journey.
+- What alternative routes are available.
+- What safety precautions they should consider.
+
+Mehfooz Ai combines community reports, available official advisories, geographical information and AI-based analysis to help users make more informed travel decisions.
+
+Our objective is not to guarantee safety or predict individual victimization. Our objective is to communicate available safety information, reported incidents, risks and uncertainty in an accessible way.
+
+### The product has five core subsystems.
+
+**SYSTEM A — DYNAMIC SAFETY HEATMAP**
+
+The interactive map is the central component of the entire application.
+
+It should visualize geographical safety information using:
+
+- Green: relatively lower observed risk according to available data.
+- Yellow: moderate reported risk.
+- Red: elevated reported risk.
+- Grey: insufficient information.
+
+The system must never interpret missing reports as proof of safety.
+
+The heatmap must support:
+
+1. Current reported-risk visualization.
+2. Historical time-of-day visualization.
+3. Community incident overlays.
+4. Official restricted/unsafe route overlays.
+5. Geographic exploration.
+6. Dynamic updates when new reports are submitted.
+
+Official restrictions must remain independently identifiable and should not be diluted by unrelated traffic indicators.
+
+**SYSTEM B — COMMUNITY INCIDENT REPORTING**
+
+Users can report safety-related problems, including:
+
+- Robbery.
+- Theft and mobile snatching.
+- Harassment.
+- Suspicious activity.
+- Road accidents.
+- Poor street lighting.
+- Dangerous road conditions.
+- Landslides and other travel hazards.
+
+Each report should contain:
+
+- Incident type/category.
+- Description.
+- Geographic location.
+- Incident date/time.
+- Optional evidence.
+- Verification status.
+
+New reports should appear as markers and contribute appropriately to the geographical intelligence engine.
+
+Reports must be moderated or labelled as unverified until appropriate corroboration.
+
+**SYSTEM C — AI SAFETY INTELLIGENCE ENGINE**
+
+AI is not merely a chatbot.
+
+It must provide meaningful processing capabilities:
+
+1. Incident description classification.
+2. Structured extraction of incident information.
+3. Provisional severity estimation.
+4. Duplicate-report detection.
+5. Support for report credibility assessment.
+6. Explanation of geographical incident patterns.
+
+Use deterministic, explainable calculations for geographical scoring.
+
+Do not allow language models to invent incident statistics or make unsupported safety claims.
+
+**SYSTEM D — SAFETY-AWARE ROUTE PLANNING**
+
+Users can specify:
+
+- Starting location.
+- Destination.
+- Departure time.
+- Travel preferences.
+
+The system should:
+
+1. Retrieve alternative road routes.
+2. Identify available incident data near each route.
+3. Check relevant official restrictions.
+4. Evaluate road hazards separately from security-related incidents.
+5. Compare routes using transparent scoring.
+6. Display route alternatives on the map.
+7. Explain the trade-offs between distance, estimated travel time and available safety evidence.
+
+Never label a route as guaranteed safe.
+
+**SYSTEM E — AGENTIC AI TRAVEL ASSISTANT**
+
+Implement an AI assistant capable of using actual backend tools.
+
+Potential user requests:
+
+- "Is this area safe to visit tonight?"
+- "Show recent incidents near my location."
+- "Plan a trip from Multan to Lahore."
+- "Which route has fewer reported incidents?"
+- "Help me plan a family trip to Hunza."
+- "Are there any reported road hazards on this route?"
+
+The assistant must retrieve available data using tool calling.
+
+Proposed tools:
+
+- get_area_safety
+- get_nearby_incidents
+- get_route_options
+- compare_route_risks
+- get_official_advisories
+- get_weather_conditions
+- find_emergency_facilities
+
+Only expose tools once a working underlying implementation or data source exists.
+
+Unavailable data must be clearly identified rather than fabricated.
+
+### Future expansion
+
+The architecture should support tourism use cases across Pakistan, including Hunza, Skardu, Naran and other northern areas.
+
+Potential future features:
+
+- Road closure alerts.
+- Weather-related travel intelligence.
+- Landslide information.
+- Emergency assistance.
+- Government integrations.
+- Community verification.
+- Push notifications.
+
+Do not overengineer these future features during the hackathon.
+
+---
+
+## 2. TECHNICAL STACK
+
+Use the following stack unless an incompatibility requires a documented adjustment.
+
+Frontend:
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+- React Leaflet
+- Leaflet
+- Lucide React
+
+Backend:
+- Python
+- FastAPI
+- Pydantic
+- SQLAlchemy or a similarly appropriate database access layer
+
+Database:
+- Supabase PostgreSQL
+- PostGIS extension
+- Supabase Auth, where practical
+
+AI:
+- An interchangeable LLM API adapter
+- Structured outputs for classification
+- Tool calling for agentic capabilities
+
+Maps:
+- OpenStreetMap-based map tiles
+- OSRM-compatible routing service
+
+Deployment targets:
+- Frontend: Vercel
+- Backend: Render or another compatible Python host
+- Database: Supabase
+
+Use a modular monolith.
+
+Do not introduce Kubernetes, microservices, Redis, Celery or other infrastructure unless demonstrably required.
+
+---
+
+## 3. CREATE THE INITIAL PROJECT STRUCTURE
+
+Create the following directory structure:
+
+```text
+mehfooz-ai/
+├── AGENTS.md
+├── README.md
+├── .gitignore
+├── .env.example
+├── docs/
+│   ├── PRODUCT_VISION.md
+│   ├── ARCHITECTURE.md
+│   ├── API_CONTRACTS.md
+│   ├── DATABASE_DESIGN.md
+│   ├── DEVELOPMENT_PLAN.md
+│   ├── SAFETY_AND_TRUST.md
+│   ├── DECISIONS.md
+│   └── MVP_CHECKLIST.md
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── maps/
+│   │   ├── hooks/
+│   │   ├── services/
+│   │   ├── types/
+│   │   └── lib/
+│   └── package.json
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── models/
+│   │   ├── schemas/
+│   │   ├── services/
+│   │   ├── ai/
+│   │   ├── routing/
+│   │   └── main.py
+│   ├── tests/
+│   └── requirements.txt
+├── database/
+│   ├── schema.sql
+│   └── seed.sql
+└── scripts/
+```
+
+If the current root directory is already named `mehfooz-ai`, do not create a second nested project directory.
+
+Initialize the Git repository if necessary.
+
+Create a suitable .gitignore for Python, Node.js, environment variables, build outputs and local caches.
+
+Do not commit secrets.
+
+---
+
+## 4. CREATE AGENTS.md — THE PERSISTENT AI DEVELOPMENT MANUAL
+
+This is one of your most important deliverables.
+
+Create a comprehensive root-level file named:
+
+`AGENTS.md`
+
+This file must serve as persistent instructions for future Codex sessions and collaborating coding agents.
+
+It must include:
+
+### Project identity
+- What Mehfooz Ai does.
+- The real-world problem.
+- Target users.
+- The hackathon theme.
+- The central role of the safety heatmap.
+
+### Architectural principles
+- Modular monolith.
+- API-first communication.
+- Strict separation between frontend, backend and database responsibilities.
+- Shared data contracts.
+- Minimal dependencies.
+- Reusable components.
+- No unnecessary abstractions.
+
+### AI engineering principles
+- AI should perform meaningful tasks.
+- Use structured outputs.
+- Validate all LLM-generated structured data.
+- Use deterministic code for risk calculations.
+- Never hallucinate incidents.
+- Never fabricate official restrictions.
+- Clearly communicate missing information.
+- Separate verified facts from AI estimates.
+
+### Map and safety principles
+- Red/yellow/green/grey semantics.
+- No data is not equivalent to safe.
+- Official restrictions remain authoritative.
+- Community reports must carry provenance.
+- Historical data must have proper timestamps.
+- Traffic must not automatically reduce crime-related risk.
+- Safety scoring must remain explainable.
+
+### Development instructions
+- Read existing files before modifying them.
+- Reuse existing components.
+- Preserve established API contracts.
+- Avoid changing unrelated modules.
+- Validate changes with relevant tests.
+- Keep code readable and maintainable.
+- Never silently modify architecture.
+- Update documentation when contracts change.
+- Prefer working implementations over placeholder components.
+- Do not claim tests passed unless executed.
+
+### Collaboration instructions
+- Multiple coding agents may work in parallel.
+- Respect module ownership.
+- Avoid modifying another agent's files without coordination.
+- Shared interfaces are controlled by the agreed contracts.
+- Do not overwrite concurrent changes.
+
+### Completion reporting
+Every coding task must finish with:
+
+1. Summary of completed work.
+2. Files created or modified.
+3. Commands executed.
+4. Test results.
+5. Known limitations.
+6. Next recommended action.
+
+Make AGENTS.md concise enough to be useful but detailed enough to prevent architectural drift.
+
+---
+
+## 5. CREATE THE DOCUMENTATION FILES
+
+### docs/PRODUCT_VISION.md
+
+Document:
+
+- Problem statement.
+- Target audiences.
+- Core product proposition.
+- Primary use cases.
+- Five major subsystems.
+- MVP boundaries.
+- Long-term expansion into tourism.
+- Core differentiation from conventional map applications.
+
+### docs/ARCHITECTURE.md
+
+Document:
+
+- System components.
+- Frontend/backend interaction.
+- Database responsibilities.
+- AI processing flow.
+- Geographic safety scoring flow.
+- Route comparison flow.
+- Incident submission lifecycle.
+
+Include Mermaid architecture diagrams.
+
+### docs/API_CONTRACTS.md
+
+Define initial request/response contracts for:
+
+- GET /api/health
+- POST /api/incidents
+- GET /api/incidents
+- GET /api/heatmap
+- GET /api/official-zones
+- GET /api/safety/area
+- GET /api/routes
+- POST /api/routes/compare
+- POST /api/ai/chat
+
+Specify:
+
+- Field names.
+- Types.
+- Required parameters.
+- Response structures.
+- Error formats.
+- Authentication expectations.
+- Timestamp format.
+- GeoJSON conventions where relevant.
+
+Use a consistent JSON response envelope.
+
+Prefer ISO 8601 UTC timestamps and WGS84 longitude/latitude coordinates.
+
+Define contracts before implementing business logic.
+
+### docs/DATABASE_DESIGN.md
+
+Define a minimal PostgreSQL/PostGIS schema involving:
+
+- profiles
+- incidents
+- official_zones
+- optional incident_evidence
+- optional materialized safety aggregates if justified
+
+Do not create unnecessary tables.
+
+Explain:
+
+- Relationships.
+- Spatial columns.
+- Indexes.
+- Authentication ownership.
+- Row-level security.
+- Incident status.
+- Data source provenance.
+- Demo-data identification.
+
+Specify how geographical scores can initially be computed on demand.
+
+### docs/DEVELOPMENT_PLAN.md
+
+Define development phases:
+
+Phase 0 — Initialization and documentation.
+
+Phase 1 — Database and backend APIs.
+
+Phase 2 — Interactive safety map.
+
+Phase 3 — Dynamic heatmap intelligence.
+
+Phase 4 — AI incident processing.
+
+Phase 5 — Safety-aware route planning.
+
+Phase 6 — Agentic AI assistant.
+
+Phase 7 — Integration, testing, deployment and hackathon demonstration.
+
+Give each phase acceptance criteria.
+
+### docs/SAFETY_AND_TRUST.md
+
+Define:
+
+- Privacy of reporters.
+- Avoidance of public personal information.
+- Reporting verification statuses.
+- Moderation requirements.
+- False-report handling.
+- AI limitations.
+- Geographical uncertainty.
+- Government data provenance.
+- Safety communication standards.
+- Retention and expiry considerations.
+
+### docs/DECISIONS.md
+
+Record important architectural decisions and the reasons behind them.
+
+### docs/MVP_CHECKLIST.md
+
+Create a practical checklist for determining whether the hackathon MVP is actually ready.
+
+---
+
+## 6. INITIAL DATABASE DESIGN
+
+Prepare a valid PostgreSQL/PostGIS schema in:
+
+`database/schema.sql`
+
+The schema should support:
+
+- UUID identifiers.
+- User ownership.
+- Incident categories.
+- Geospatial incident locations.
+- Incident timestamps.
+- Severity.
+- Verification status.
+- Report credibility metadata.
+- Data source.
+- Official zones and their source metadata.
+- Spatial indexes.
+
+Use PostGIS geography or geometry consistently.
+
+Include appropriate constraints and security policies.
+
+Use idempotent SQL where practical.
+
+Do not assume official government data is available.
+
+Prepare a separate seed script using clearly labelled fictional incident data within a small geographical area of Multan.
+
+Seed records must never impersonate real official advisories or actual crime reports.
+
+The seed script should be safe to rerun without creating uncontrolled duplicates.
+
+---
+
+## 7. INITIAL APPLICATION BOOTSTRAP
+
+Initialize the frontend and backend so that both can start locally.
+
+Frontend:
+
+- React/Vite/TypeScript setup.
+- Tailwind configuration.
+- Basic application shell.
+- Placeholder route/page structure.
+- API client foundation.
+- Environment variable configuration.
+
+Backend:
+
+- FastAPI application.
+- CORS configuration.
+- GET /api/health.
+- Environment configuration.
+- Organized router structure.
+- Basic test setup.
+
+Do not implement major feature logic yet.
+
+Do not leave incomplete imports or broken application entry points.
+
+The frontend should run, and the backend health endpoint should return a valid response.
+
+---
+
+## 8. ENVIRONMENT CONFIGURATION
+
+Create `.env.example` with clearly documented variables for:
+
+- Supabase URL.
+- Supabase public/anon key.
+- Supabase server-side service-role key, if required.
+- Database connection string.
+- LLM provider/API key.
+- LLM model identifier.
+- Routing service URL.
+- Frontend API URL.
+- Allowed CORS origins.
+
+Never create actual secret values.
+
+Never expose privileged credentials through frontend environment variables.
+
+Provide exact local setup instructions.
+
+---
+
+## 9. HACKATHON CONSTRAINTS
+
+We have approximately 24 hours.
+
+Optimize for:
+
+1. Working functionality.
+2. A polished interactive map.
+3. Real database integration.
+4. Meaningful AI integration.
+5. A convincing end-to-end demonstration.
+6. Modular support for a later Mystery Card challenge.
+
+Do not spend excessive effort on:
+
+- Enterprise-scale architecture.
+- Advanced machine-learning training.
+- Nationwide dataset collection.
+- Native mobile applications.
+- Complex infrastructure.
+- Unnecessary third-party integrations.
+
+The MVP should work for a limited geographical region before expanding.
+
+---
+
+## 10. PHASE 0 ACCEPTANCE CRITERIA
+
+Before completing this phase:
+
+1. Verify the expected project folders exist.
+2. Verify all required documentation files exist and contain meaningful content.
+3. Verify AGENTS.md accurately represents the project.
+4. Verify frontend dependencies install.
+5. Verify frontend builds successfully.
+6. Verify backend dependencies are declared and install where the environment permits.
+7. Verify GET /api/health works.
+8. Verify database/schema.sql is syntactically valid where database tooling is available.
+9. Verify environment variables are documented.
+10. Verify no secrets have been committed.
+11. Verify Git status and report the current repository state.
+
+Do not claim any validation succeeded without actually executing it.
+
+If external credentials or services are unavailable, report the blocker and provide exact setup instructions.
+
+Do not substitute mocked external-service success for genuine integration.
+
+---
+
+## 11. FINAL INSTRUCTION
+
+You have sufficient context to complete Phase 0 autonomously.
+
+Inspect the current directory first.
+
+Create the necessary files.
+
+Install dependencies where possible.
+
+Execute the available checks.
+
+Fix problems discovered during setup.
+
+At the end, give me:
+
+- What was created.
+- What was validated.
+- What requires external configuration.
+- Any architectural decisions.
+- The exact command to run the frontend.
+- The exact command to run the backend.
+- Whether the repository is ready for Phase 1.
+
+**Begin Phase 0 implementation now. Do not merely provide a plan or describe the files. Create them in the repository.**

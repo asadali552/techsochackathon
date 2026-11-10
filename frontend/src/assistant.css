@@ -1,0 +1,140 @@
+.assistant-screen { --assistant-width: min(392px, 47vw); }
+
+.assistant-screen .assistant-panel {
+  top: calc(var(--map-top) + 58px);
+  width: var(--assistant-width);
+  height: min(650px, calc(100dvh - var(--map-top) - var(--bottom) - 80px));
+  max-height: none;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+}
+
+.assistant-panel .panel-header { padding: 11px 13px 11px 16px; }
+.assistant-panel .panel-header h2 { margin: 0; font-size: 17px; }
+.assistant-panel .panel-header p { margin-top: 3px; color: var(--muted); font-size: 11px; }
+.assistant-panel .icon-button { width: 42px; height: 42px; border-radius: 10px; }
+.assistant-panel .icon-button:hover { background: var(--map-tint); color: var(--accent); }
+.assistant-header-actions, .assistant-context, .assistant-input { display: flex; align-items: center; gap: 6px; }
+
+.assistant-thread {
+  position: relative;
+  overflow: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  align-content: start;
+  gap: 20px;
+  padding: 14px 16px;
+}
+
+.assistant-welcome, .assistant-turn, .assistant-answer, .assistant-choices { display: grid; gap: 9px; min-width: 0; }
+.assistant-welcome { padding-block: 8px; gap: 5px; color: var(--muted); font-size: 13px; }
+.assistant-welcome strong { color: var(--ink); font-size: 21px; letter-spacing: -.035em; font-weight: 740; }
+.assistant-prompts { display: grid; margin-top: 10px; border-top: 1px solid var(--line); }
+.assistant-prompts button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 7px 4px;
+  min-height: 44px;
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+  font-weight: 610;
+  text-align: left;
+}
+.assistant-prompts button svg { flex: none; }
+.assistant-prompts button:hover { background: var(--map-subtle); }
+
+.assistant-question {
+  justify-self: end;
+  max-width: 88%;
+  padding: 8px 11px;
+  border-radius: 12px 12px 4px 12px;
+  background: var(--map-tint);
+  color: #174d45;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.assistant-answer { font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.assistant-answer > p:first-child { white-space: pre-line; }
+.assistant-answer .text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  width: fit-content;
+  min-height: 34px;
+  text-align: left;
+  font-size: 12px;
+  color: var(--accent);
+}
+.assistant-evidence { display: grid; gap: 4px; padding-top: 9px; border-top: 1px solid var(--line); }
+.assistant-evidence dl { margin: 0; }
+.assistant-evidence dl div { display: flex; justify-content: space-between; gap: 8px; }
+.assistant-evidence dd { font-weight: 640; text-align: right; }
+.assistant-evidence small { display: block; color: var(--muted); font-size: 11px; }
+.assistant-evidence > div + div { border-top: 1px solid var(--line); padding-top: 6px; }
+.assistant-gap { font-size: 11px; color: var(--muted); }
+.assistant-source { width: fit-content; color: var(--accent); text-decoration: underline; font-size: 11px; }
+.assistant-progress { display: flex; align-items: center; gap: 7px; color: var(--muted); font-size: 12px; }
+.assistant-progress svg { color: var(--accent); animation: assistant-spin 1s linear infinite; }
+@keyframes assistant-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .assistant-progress svg { animation: none; } }
+.assistant-error { padding: 9px 11px; border-radius: 10px; background: #fbf3ef; color: #803d28; font-size: 12px; }
+.assistant-error .secondary-button { margin-top: 7px; }
+
+.assistant-composer { display: grid; gap: 6px; border-top: 1px solid var(--line); padding: 9px 13px 11px; }
+.assistant-context { flex-wrap: wrap; gap: 5px 12px; color: var(--muted); font-size: 11px; }
+.assistant-context:empty { display: none; }
+.assistant-context label { display: flex; align-items: center; gap: 5px; min-height: 24px; }
+.assistant-context input { accent-color: var(--accent); }
+.assistant-input { border: 1px solid var(--line); border-radius: 12px; background: var(--map-subtle); padding: 4px; }
+.assistant-input:focus-within { border-color: var(--accent); }
+.assistant-input textarea { flex: 1; min-width: 0; resize: none; border: 0; outline: 0; padding: 5px 6px; font-size: 13px; }
+.assistant-input button { flex: none; width: 40px; height: 40px; padding: 0; display: grid; place-items: center; border-radius: 9px; }
+.assistant-input button:not(:disabled) { background: var(--accent); border-color: var(--accent); }
+.assistant-composer > small { color: var(--muted); font-size: 10px; }
+
+@media (min-width: 761px) {
+  .assistant-screen .map-controls {
+    right: calc(var(--edge) + var(--assistant-width) + 12px);
+    bottom: calc(var(--bottom) + 64px);
+  }
+}
+@media (max-width: 760px) {
+  .assistant-screen .assistant-panel {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: var(--bottom);
+    width: 100%;
+    height: min(540px, 59dvh);
+    border-radius: var(--map-radius) var(--map-radius) 0 0;
+  }
+  .assistant-screen .assistant-panel[data-keyboard="true"] {
+    z-index: 1110;
+    bottom: var(--assistant-keyboard);
+    height: min(59dvh, calc(100dvh - var(--assistant-keyboard) - env(safe-area-inset-top)));
+  }
+  .assistant-screen .map-controls {
+    top: calc(var(--map-top) + 159px);
+    bottom: auto;
+    display: flex;
+    gap: 6px;
+  }
+  .assistant-screen .control-stack { display: flex; }
+  .assistant-screen .control-stack button { width: 44px; }
+  .assistant-screen .control-stack button + button { border-top: 0; border-left: 1px solid var(--line); }
+  .assistant-screen .tile-notice { top: calc(var(--map-top) + 210px); bottom: auto; }
+  .assistant-screen .data-notice { top: calc(var(--map-top) + 210px); }
+  .assistant-panel .icon-button, .assistant-input button { width: 44px; height: 44px; }
+  .assistant-input textarea { font-size: 16px; }
+  .assistant-context label { min-height: 30px; }
+  .assistant-answer .text-button { min-height: 44px; }
+}
+@media (max-width: 760px) and (max-height: 720px) {
+  .assistant-screen .assistant-panel:not([data-keyboard="true"]) {
+    height: min(59dvh, max(230px, calc(100dvh - var(--map-top) - var(--bottom) - 213px)));
+  }
+}

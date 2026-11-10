@@ -1,0 +1,184 @@
+/* The Safety Map establishes the visual direction for the rest of the product. */
+.map-screen, .planner-screen, .report-screen, .assistant-screen {
+  --ink: #152a2b;
+  --muted: #4d6062;
+  --subtle: #526668;
+  --surface: #fff;
+  --line: #e1e9e7;
+  --accent: #146458;
+  --map-tint: #e6f3ef;
+  --map-subtle: #f3f7f6;
+  --map-shadow: 0 10px 28px #182f3020, 0 2px 5px #182f300e;
+  --map-radius: 18px;
+  --edge: 24px;
+  --map-top: calc(var(--edge) + env(safe-area-inset-top));
+  --map-search-width: 352px;
+  --map-detail-width: 356px;
+  --bottom: calc(24px + env(safe-area-inset-bottom));
+}
+
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .floating { border-color: #dfe7e4; border-radius: var(--map-radius); box-shadow: var(--map-shadow); }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .map-frame, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .leaflet-container { background: #e7eeeb; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .leaflet-tile-pane { filter: saturate(.64) contrast(.92) brightness(1.068); }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .incident-marker span, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .incident-cluster span { box-shadow: 0 2px 6px #182f3033; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .incident-cluster span { background: #234340; border-color: #fff; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .leaflet-tooltip { border-radius: 8px; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .leaflet-container .leaflet-control-attribution {
+  background: #fffffff5; border-radius: 7px 0 0 0; margin-right: 0; padding-inline: 6px;
+}
+
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand {
+  top: var(--map-top); width: var(--map-search-width); min-height: 62px; gap: 11px;
+  padding: 11px 13px; border-bottom: 0; border-radius: var(--map-radius) var(--map-radius) 0 0; box-shadow: none;
+}
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand-icon {
+  width: 38px; height: 38px; border-radius: 12px; background: linear-gradient(150deg, #277467, #143f3c);
+}
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand strong { font-size: 21px; letter-spacing: -.055em; font-weight: 760; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand small { font-size: 10px; letter-spacing: .045em; margin-top: 3px; font-weight: 650; }
+:is(.map-screen, .assistant-screen) .place-search {
+  top: calc(var(--map-top) + 61px); width: var(--map-search-width); padding: 0 10px 10px;
+  border-top: 0; border-radius: 0 0 var(--map-radius) var(--map-radius); box-shadow: 0 12px 24px -10px #182f3045;
+}
+:is(.map-screen, .assistant-screen) .place-search:focus-within { border-color: #dfe7e4; }
+:is(.map-screen, .assistant-screen) .search-line {
+  min-height: 45px; gap: 11px; padding-inline: 12px; border: 1px solid #e5ecea;
+  background: var(--map-subtle); border-radius: 12px;
+}
+:is(.map-screen, .assistant-screen) .search-line:focus-within { border-color: #6caa9e; box-shadow: 0 0 0 2px #1464581c; }
+:is(.map-screen, .assistant-screen) .search-line input { font-size: 14px; font-weight: 475; }
+:is(.map-screen, .assistant-screen) .search-line input::placeholder { color: #5c706f; }
+:is(.map-screen, .assistant-screen) .search-results { margin-top: 9px; padding: 7px 0 0; }
+:is(.map-screen, .assistant-screen) .search-results button { min-height: 46px; padding: 8px; border-radius: 9px; }
+:is(.map-screen, .assistant-screen) .search-results button:hover { color: var(--accent); background: var(--map-tint); }
+:is(.map-screen, .assistant-screen) .search-results strong { font-size: 13px; }
+
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .map-tools { display: contents; }
+:is(.map-screen, .planner-screen, .assistant-screen) .map-tools-main, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .map-tools-account { position: absolute; z-index: 1075; padding: 4px; gap: 3px; border-radius: 14px; }
+:is(.map-screen, .planner-screen, .assistant-screen) .map-tools-main { top: calc(var(--map-top) + 128px); left: var(--edge); right: auto; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .map-tools-account { top: var(--map-top); right: var(--edge); }
+:is(.map-screen, .planner-screen, .assistant-screen) .time-control, :is(.map-screen, .planner-screen, .assistant-screen) .layer-menu > summary, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .mode-button, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .account-button {
+  min-height: 38px; padding: 0 10px; font-size: 12px; border-radius: 10px;
+}
+:is(.map-screen, .planner-screen, .assistant-screen) .time-control { gap: 8px; }
+:is(.map-screen, .planner-screen, .assistant-screen) .time-control select { max-width: 152px; }
+:is(.map-screen, .planner-screen, .assistant-screen) .layer-menu { position: static; }
+:is(.map-screen, .planner-screen, .assistant-screen) .layer-menu[open] > summary, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .mode-button[aria-pressed="false"] { color: var(--accent); background: var(--map-tint); }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .mode-button[aria-pressed="true"] { color: #694681; background: #f3edf8; }
+:is(.map-screen, .planner-screen, .assistant-screen) .layer-modified { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; }
+:is(.map-screen, .planner-screen, .assistant-screen) .filter-popover {
+  left: 0; right: auto; width: min(310px, calc(100vw - 2 * var(--edge))); padding: 14px;
+  max-height: min(600px, calc(100dvh - var(--map-top) - 194px - var(--bottom))); gap: 12px;
+}
+:is(.map-screen, .planner-screen, .assistant-screen) .layer-option { min-height: 35px; }
+:is(.map-screen, .planner-screen, .assistant-screen) .filter-fields select, :is(.map-screen, .planner-screen, .assistant-screen) .filter-fields input, :is(.map-screen, .planner-screen, .assistant-screen) .layer-dimension select {
+  min-height: 37px; border-radius: 8px; padding-inline: 8px;
+}
+:is(.map-screen, .planner-screen, .assistant-screen) .data-notice { top: calc(var(--map-top) + 186px); padding: 10px 12px; border-radius: 12px; font-size: 12px; }
+
+:is(.map-screen, .planner-screen) .map-key { width: 284px; padding: 12px 13px; }
+:is(.map-screen, .planner-screen) .view-status { min-height: 28px; color: var(--muted); font-weight: 580; }
+:is(.map-screen, .planner-screen) .view-status > button {
+  gap: 6px; border-radius: 9px; padding: 5px 8px; min-height: 30px; background: var(--map-subtle); color: var(--accent);
+}
+:is(.map-screen, .planner-screen) .view-status > button:hover, :is(.map-screen, .planner-screen) .view-status > button[aria-pressed="true"] { background: var(--map-tint); text-decoration: none; }
+:is(.map-screen, .planner-screen) .heatmap-legend { margin-top: 9px; padding-top: 10px; }
+:is(.map-screen, .planner-screen) .legend-heading strong { font-size: 16px; line-height: 1.2; font-weight: 735; letter-spacing: -.028em; }
+:is(.map-screen, .planner-screen) .legend-heading small { font-size: 11px; margin-top: 3px; }
+:is(.map-screen, .planner-screen) .legend-heading .icon-button { width: 35px; height: 35px; background: var(--map-subtle); border-radius: 10px; }
+:is(.map-screen, .planner-screen) .legend-heading .icon-button:hover { background: var(--map-tint); color: var(--accent); }
+:is(.map-screen, .planner-screen) .heatmap-views { gap: 3px; margin-top: 10px; padding: 3px; border-radius: 11px; background: var(--map-subtle); }
+:is(.map-screen, .planner-screen) .heatmap-views button { min-height: 32px; border-radius: 8px; font-size: 11px; }
+:is(.map-screen, .planner-screen) .heatmap-views button[aria-pressed="true"] { color: var(--accent); box-shadow: 0 1px 4px #182f3024; }
+:is(.map-screen, .planner-screen) .risk-ramp { height: 7px; border-radius: 6px; margin-top: 11px; }
+:is(.map-screen, .planner-screen) .risk-scale { margin-top: 4px; color: var(--muted); font-size: 10px; font-weight: 580; }
+:is(.map-screen, .planner-screen) .activity-scale { margin-top: 12px; }
+:is(.map-screen, .planner-screen) .activity-scale i { height: 7px; }
+:is(.map-screen, .planner-screen) .coverage-key { margin-top: 8px; font-size: 10px; }
+:is(.map-screen, .planner-screen) .heatmap-status { margin-top: 5px; }
+:is(.map-screen, .planner-screen) .tile-notice { bottom: calc(var(--bottom) + 231px); }
+
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .map-controls { bottom: calc(var(--bottom) + 2px); gap: 9px; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .control-stack { border-radius: 14px; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .control-stack button { width: 45px; height: 44px; color: #244340; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .control-stack button:hover { color: var(--accent); background: var(--map-tint); }
+
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation { gap: 4px; padding: 5px; border-radius: 17px; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation a { min-height: 45px; padding-inline: 14px; gap: 8px; border-radius: 12px; color: #455b5b; }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation a:hover { background: var(--map-subtle); }
+:is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation a[aria-current="page"] { background: var(--map-tint); color: #135b50; }
+
+.map-screen .context-panel[aria-label="Map details"] { top: calc(var(--map-top) + 62px); width: var(--map-detail-width); max-height: calc(100dvh - var(--map-top) - 134px); }
+.map-screen .panel-header { padding: 14px 15px 14px 16px; }
+.map-screen .panel-header h2 { font-size: 21px; }
+.map-screen .panel-header .icon-button { width: 39px; height: 39px; border-radius: 11px; background: var(--map-subtle); }
+.map-screen .panel-header .icon-button:hover { background: var(--map-tint); }
+.map-screen .detail-body { padding: 16px; }
+.map-screen .detail-body dl { gap: 0; margin-bottom: 12px; }
+.map-screen .detail-body dl div { grid-template-columns: 92px minmax(0, 1fr); gap: 10px; padding-block: 8px; border-top: 1px solid var(--line); }
+.map-screen .detail-copy { font-size: 13px; line-height: 1.5; margin: 11px 0; }
+.map-screen .note { padding: 9px 10px; border-radius: 9px; background: var(--map-subtle); }
+.map-screen .evidence-list button { padding: 11px 15px; }
+.map-screen .evidence-list button:hover { background: var(--map-subtle); }
+.map-screen .feed-glyph { background: var(--map-subtle); border-radius: 9px; }
+.map-screen .heatmap-reading { padding: 10px 12px; background: var(--map-subtle); border-radius: 12px; }
+.map-screen .heatmap-reading-value { display: flex; align-items: baseline; flex-wrap: wrap; gap: 7px; color: var(--muted); font-size: 13px; }
+.map-screen .heatmap-reading-value strong { font-size: 34px; letter-spacing: -.055em; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+.map-screen .heatmap-reading-value .heatmap-reading-unknown { font-size: 19px; letter-spacing: -.025em; }
+.map-screen .heatmap-reading .badge-row { margin-top: 8px; }
+.map-screen .heatmap-reading .badge-row:empty { margin: 0; }
+.map-screen .cell-breakdown { margin: 0 0 10px; }
+.map-screen .detail-body > .secondary-button { min-height: 42px; border-radius: 10px; color: var(--accent); background: var(--map-tint); }
+
+@media (min-width: 761px) {
+  .map-screen:has(.context-panel[aria-label="Map details"]:not([hidden])) .map-controls { right: calc(var(--edge) + var(--map-detail-width) + 12px); }
+}
+
+@media (max-width: 1180px) {
+  .map-screen, .planner-screen, .report-screen, .assistant-screen { --nav-clearance: 75px; --bottom: calc(92px + env(safe-area-inset-bottom)); }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation {
+    left: 50%; right: auto; bottom: calc(11px + env(safe-area-inset-bottom)); transform: translateX(-50%);
+    width: min(540px, calc(100% - 2 * var(--edge))); display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 3px; padding: 5px; border: 1px solid #dfe7e4; box-shadow: var(--map-shadow);
+  }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation a { min-height: 52px; flex-direction: column; gap: 4px; padding: 4px 2px; font-size: 10px; }
+}
+@media (max-width: 760px) {
+  .map-screen, .assistant-screen { --edge: 12px; --map-search-width: calc(100% - 2 * var(--edge)); }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand { width: auto; min-height: 44px; padding: 5px 9px 5px 5px; gap: 7px; border: 1px solid #dfe7e4; border-radius: 14px; box-shadow: var(--map-shadow); }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand-icon { width: 32px; height: 32px; border-radius: 10px; }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand strong { font-size: 17px; }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .brand small { font-size: 8px; margin-top: 2px; }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .map-tools-account { padding: 3px; }
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .mode-button, :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .account-button { padding-inline: 8px; }
+  :is(.map-screen, .assistant-screen) .place-search {
+    top: calc(var(--map-top) + 52px); padding: 0; border: 1px solid #dfe7e4;
+    border-radius: 15px; box-shadow: var(--map-shadow);
+  }
+  :is(.map-screen, .assistant-screen) .search-line { min-height: 46px; background: transparent; border-color: transparent; border-radius: 14px; }
+  :is(.map-screen, .assistant-screen) .search-line input { font-size: 16px; }
+  :is(.map-screen, .assistant-screen) .search-results { padding: 6px; margin-top: 0; }
+  :is(.map-screen, .planner-screen, .assistant-screen) .map-tools-main { top: calc(var(--map-top) + 108px); }
+  :is(.map-screen, .planner-screen, .assistant-screen) .filter-popover { max-height: calc(100dvh - var(--map-top) - 174px - var(--bottom)); }
+  :is(.map-screen, .planner-screen, .assistant-screen) .data-notice { top: calc(var(--map-top) + 163px); }
+  :is(.map-screen, .planner-screen) .map-key { width: min(248px, calc(100vw - 2 * var(--edge) - 62px)); padding: 9px 10px; }
+  :is(.map-screen, .planner-screen) .legend-heading strong { font-size: 15px; }
+  :is(.map-screen, .planner-screen) .heatmap-legend { margin-top: 6px; padding-top: 8px; }
+  :is(.map-screen, .planner-screen) .heatmap-views { margin-top: 7px; }
+  :is(.map-screen, .planner-screen) .risk-scale { gap: 2px; }
+  .map-screen .context-panel[aria-label="Map details"] {
+    top: auto; left: var(--edge); right: var(--edge); bottom: var(--bottom);
+    width: auto; max-height: min(520px, 55dvh);
+  }
+  .map-screen:has(.context-panel[aria-label="Map details"]:not([hidden])) :is(.map-key, .map-controls) {
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 350px) {
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .navigation a { font-size: 9px; }
+}
+
+@media (max-height: 640px) {
+  :is(.map-screen, .planner-screen, .report-screen, .assistant-screen) .control-stack button { width: 40px; height: 37px; }
+}
